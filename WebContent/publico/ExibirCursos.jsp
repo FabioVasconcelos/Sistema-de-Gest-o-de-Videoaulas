@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<%@page import="java.util.List"%>
+<%@page import="Modelo.Curso"%>
+<%@page import="Modelo.Aula"%>
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+ <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/screen.css" type="text/css" media="screen, projection">
+
+</head>
+<body>
+  <div class="container">
+   
+    
+     <div class="span-24 last">
+     
+     	    <img src="<%=request.getContextPath()%>/resources/img/logo_eletrofabio2012.jpg"/>	
+     </div>
+      <hr>
+      <div class="span-4 " style="background-color: #F4F4F4">
+       <%@ include file="/resources/template/lateral.jsp"%>
+      </div>
+
+      <div class="span-18 last">
+     
+        <%
+			List<Curso> lista = (List<Curso>) request.getAttribute("listaCursos");
+			if (lista.isEmpty()) {
+			%>
+			<p>Não há cursos no banco de dados</p>
+			<%
+			}
+			else {
+			%>
+			<table>			
+				<tr>										
+					<th>Nome:</th>							
+					<th>Preço:</th>												
+					<th>Duração (Minutos)</th>
+				</tr>	
+							
+				
+			<%
+				for (Curso x:lista) {
+			%>	
+				<tr>
+					<td><a href="<%=request.getContextPath()%>/publico/DetalhesCurso?idCurso=<%=x.getIdCurso()%>"><%=x.getNome() %></a></td>			
+					<td><span style="color: red">    <%=x.getPreco() %></span></td>
+					<td><%=x.getDuracao() %></td>
+					
+				</tr>
+				
+			
+			<%
+				}
+			%>
+			</table>
+			<%
+			}
+			%>
+      </div>
+      <hr>
+      <hr class="space">
+      
+
+
+</div>
+</body>
+</html>
